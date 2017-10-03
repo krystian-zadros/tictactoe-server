@@ -9,7 +9,6 @@ import pl.kzadros.tictactoe.states.FieldStates;
  * @author kzadros
  */
 public class GameBoard {
-    private static int count = 0;
     private String id;
     private Integer[][] board;
     private List<User> players;
@@ -21,18 +20,6 @@ public class GameBoard {
 
     private int decodeUserNumber(int userNumber) {
         return userNumber - FieldStates.PLAYER.ordinal();
-    }
-    
-    public void init(int size) {
-        Integer[][] board = new Integer[size][size];
-        for (int i=0 ; i<board.length ; i++) {
-            for (int j=0 ; j<board[i].length ; j++) {
-                board[i][j] = FieldStates.EMPTY.ordinal();
-            }
-        }
-        this.board = board;
-        this.id = Integer.toString(++count);
-        this.currentPlayerNumber = 0;
     }
     
     /**

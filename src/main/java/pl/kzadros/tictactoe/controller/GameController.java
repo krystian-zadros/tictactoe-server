@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import pl.kzadros.tictactoe.dto.MoveDto;
 import pl.kzadros.tictactoe.entities.GameBoard;
 import pl.kzadros.tictactoe.entities.User;
+import pl.kzadros.tictactoe.entities.factory.GameBoardFactory;
 import pl.kzadros.tictactoe.repository.GameBoardRepository;
 import pl.kzadros.tictactoe.repository.UserRepository;
 import pl.kzadros.tictactoe.service.json.ParserJSON;
@@ -23,8 +24,7 @@ public class GameController {
     public String initGame(String... usersIds) throws Exception {
         if (usersIds.length != 2)
             throw new Exception("Wrong amont of players. Given " + usersIds.length + ".");
-        GameBoard board = new GameBoard();
-        board.init(3);
+        GameBoard board = GameBoardFactory.create(3);
         
         List<User> users = new ArrayList();
         User user;

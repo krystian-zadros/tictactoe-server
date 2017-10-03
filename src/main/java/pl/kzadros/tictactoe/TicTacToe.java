@@ -7,22 +7,16 @@ import pl.kzadros.tictactoe.dto.MoveDto;
 import pl.kzadros.tictactoe.entities.GameBoard;
 import pl.kzadros.tictactoe.entities.Role;
 import pl.kzadros.tictactoe.entities.User;
+import pl.kzadros.tictactoe.entities.factory.UserFactory;
 import pl.kzadros.tictactoe.repository.GameBoardRepository;
 import pl.kzadros.tictactoe.repository.UserRepository;
 
 public class TicTacToe {
     public static void initDatabase() throws Exception {
-        User mistrz = new User();
-        User malgorzata = new User();
-        
-        mistrz.init();
-        mistrz.setName("Mistrz");
-        mistrz.addRole(Role.createUser());
+        User mistrz = UserFactory.create("Mistrz");
+        User malgorzata = UserFactory.create("Malgorzata");
+
         mistrz.addRole(Role.createPlayer());
-        
-        malgorzata.init();
-        malgorzata.setName("Malgorzata");
-        malgorzata.addRole(Role.createUser());
         malgorzata.addRole(Role.createPlayer());
         
         UserRepository userRepo = new UserRepository();

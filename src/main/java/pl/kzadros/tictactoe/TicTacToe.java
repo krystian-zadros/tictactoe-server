@@ -7,6 +7,7 @@ import pl.kzadros.tictactoe.dto.MoveDto;
 import pl.kzadros.tictactoe.entities.GameBoard;
 import pl.kzadros.tictactoe.entities.Role;
 import pl.kzadros.tictactoe.entities.User;
+import pl.kzadros.tictactoe.entities.factory.GameBoardFactory;
 import pl.kzadros.tictactoe.entities.factory.UserFactory;
 import pl.kzadros.tictactoe.repository.GameBoardRepository;
 import pl.kzadros.tictactoe.repository.UserRepository;
@@ -32,15 +33,17 @@ public class TicTacToe {
         }
         GameController controller = new GameController();
         try {
+            //GameBoard game = GameBoardFactory.create(3);
             String gameId = controller.initGame("1", "2");
             MoveDto move = new MoveDto();
             move.setCol(1);
             move.setRow(2);
             move.setUser("1");
-            move.setGameId("1");
+            move.setGameId(gameId);
             controller.makeMove(move);
         } catch (Exception ex) {
-            Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
         System.out.println("Koniec.");
     }

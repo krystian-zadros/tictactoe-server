@@ -48,9 +48,11 @@ public class GameController {
     public void makeMove(MoveDto moveDto) throws Exception {
         // 1. Validate
         if (moveDto.getGameId().isEmpty())
-            throw new Exception();
+            throw new Exception("Empty moveDto id.");
         // 2. Get
         GameBoard board = gameBoardRepository.find(moveDto.getGameId());
+        if (board == null)
+            throw new Exception("Game with id='" + moveDto.getGameId() + "' not found.");
         // 3. Change
         board.makeMove(moveDto);
         // 4. Update in database

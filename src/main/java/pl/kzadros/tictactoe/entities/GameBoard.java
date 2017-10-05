@@ -67,7 +67,7 @@ public class GameBoard {
     
     public void makeMove(MoveDto move) throws Exception {
         int boardHeight = board.length;
-        int boardWidth = board[0].length;
+        /*int boardWidth = board[0].length;
         if (move.getRow() < 0 
                 || move.getCol() < 0
                 || move.getRow() > boardWidth 
@@ -76,6 +76,6 @@ public class GameBoard {
         if (board[move.getRow()][move.getCol()] != FieldStates.EMPTY.ordinal())
             throw new Exception("Field isn't empty.");
         
-        board[move.getRow()][move.getCol()] = encodeUserNumber(currentPlayerNumber);
+        board[move.getRow()][move.getCol()] = encodeUserNumber(currentPlayerNumber);*/
     }
 }

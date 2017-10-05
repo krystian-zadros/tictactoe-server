@@ -1,7 +1,10 @@
 package pl.kzadros.tictactoe.test.repository;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import pl.kzadros.tictactoe.entities.Role;
 import pl.kzadros.tictactoe.entities.User;
@@ -14,15 +17,20 @@ import pl.kzadros.tictactoe.repository.UserRepository;
  * @author kzadros
  */
 public class UserRepositoryTest {
-    UserRepository userRepo;
+    public static UserRepository userRepo;
+    public static String[] ids;
     
-    @Before
-    public void init() throws Exception {
+    @BeforeClass
+    public static void init() throws Exception {
         userRepo = new UserRepository();
-        //MockDatabase.initDatabase();
+        ids = new String[]{"1test", "2test"};
+        
         User mistrz = UserFactory.create("Mistrz");
         User malgorzata = UserFactory.create("Malgorzata");
 
+        mistrz.setId(ids[0]);
+        malgorzata.setId(ids[1]);
+        
         mistrz.addRole(Role.createPlayer());
         malgorzata.addRole(Role.createPlayer());
         
@@ -30,10 +38,19 @@ public class UserRepositoryTest {
         userRepo.save(malgorzata);
     }
     
+    @AfterClass
+    public static void destruct() throws Exception {
+        User user;
+        for (String id : ids) {
+            user = userRepo.find(id);
+            userRepo.remove(user);
+        }
+    }
+    
     @Test
     public void findById() {
         // Given
-        String expectedId = "2";
+        String expectedId = ids[1];
         // Do
         User actualUser = userRepo.find(expectedId);
         String actualId = actualUser.getId();
@@ -52,6 +69,7 @@ public class UserRepositoryTest {
         userRepo.save(expected);
         // Then
         User actual = userRepo.find(userId);
+        Assert.assertNotNull(actual);
         Assert.assertEquals(expected, actual);
     }
     

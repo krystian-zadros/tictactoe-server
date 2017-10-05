@@ -54,4 +54,9 @@ public class GameBoardTest {
         }
     }
     
+    @Test
+    public void makeMoveTest() {
+        
+    }
+    
 }

@@ -13,17 +13,9 @@ public class GameBoard {
     private Integer[][] board;
     private List<User> players;
     private Integer currentPlayerNumber;
-
-    private int encodeUserNumber(int userNumber) {
-        return userNumber + FieldStates.PLAYER.ordinal();
-    }
-
-    private int decodeUserNumber(int userNumber) {
-        return userNumber - FieldStates.PLAYER.ordinal();
-    }
     
     /**
-     * @TODO czy hashCode() jest pozostaje takie samo po rekompilacji?
+     * @TODO czy hashCode() pozostaje takie samo po rekompilacji?
      * @param size 
      */
     public GameBoard() {

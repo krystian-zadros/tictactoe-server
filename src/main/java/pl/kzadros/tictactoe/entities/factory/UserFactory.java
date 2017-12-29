@@ -10,7 +10,7 @@ import pl.kzadros.tictactoe.entities.User;
  * @author kzadros
  */
 public class UserFactory {
-    private static int count = 0;
+    private static int counter = 0;
     
     public static User create(String name) {
         User user = create();
@@ -19,7 +19,7 @@ public class UserFactory {
     }
     
     public static User create() {
-        String id = Integer.toString(++count);
+        String id = Integer.toString(++counter);
         User user = new User();
         List<Role> roles = new ArrayList<>();
         roles.add(Role.createUser());

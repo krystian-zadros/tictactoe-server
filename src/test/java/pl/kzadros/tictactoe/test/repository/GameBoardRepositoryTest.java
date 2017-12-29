@@ -60,7 +60,7 @@ public class GameBoardRepositoryTest {
     
     @Test
     public void saveTest() throws Exception {
-        GameBoard game = GameBoardFactory.create(3);
+        GameBoard game = GameBoardFactory.createTicTacToe();
         User player1 = userRepo.find(idsUsers.get(0));
         User player2 = userRepo.find(idsUsers.get(1));
         List<User> players = new ArrayList<>();

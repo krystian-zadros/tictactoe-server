@@ -13,11 +13,11 @@ public class MoveDto {
     public MoveDto() {
     }
     
-    public String getUser() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUser(String user) {
+    public void setUserId(String user) {
         this.userId = user;
     }
 

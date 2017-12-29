@@ -1,7 +1,10 @@
 package pl.kzadros.tictactoe.entities;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import pl.kzadros.tictactoe.dto.MoveDto;
+import pl.kzadros.tictactoe.entities.figures.Field;
 import pl.kzadros.tictactoe.states.FieldStates;
 
 /**
@@ -10,7 +13,7 @@ import pl.kzadros.tictactoe.states.FieldStates;
  */
 public class GameBoard {
     private String id;
-    private Integer[][] board;
+    private Field[][] board;
     private List<User> players;
     private Integer currentPlayerNumber;
     
@@ -20,14 +23,6 @@ public class GameBoard {
      */
     public GameBoard() {
     }
-    
-    public Integer[][] getBoard() {
-        return board;
-    }
-
-    public void setBoard(Integer[][] board) {
-        this.board = board;
-    }
 
     public List<User> getPlayers() {
         return players;
@@ -35,6 +30,9 @@ public class GameBoard {
 
     public void setPlayers(List<User> players) {
         this.players = players;
+        players.sort(
+            (user1, user2) -> (user1.getId().compareTo(user2.getId()))
+        );
     }
 
     public Integer getCurrentPlayerNumber() {
@@ -53,6 +51,14 @@ public class GameBoard {
         this.id = id;
     }
     
+    public Field[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(Field[][] boardBetter) {
+        this.board = boardBetter;
+    }
+    
     public void nextPlayerCanMove() {
         this.currentPlayerNumber = (currentPlayerNumber+1)%players.size();
     }
@@ -69,5 +75,21 @@ public class GameBoard {
             throw new Exception("Field isn't empty.");
         
         board[move.getRow()][move.getCol()] = encodeUserNumber(currentPlayerNumber);*/
+    }
+    
+    public String generateBoardAsString() {
+        StringBuilder array = new StringBuilder();
+        for (Field[] row : this.board) {
+            array.append("[ ");
+            for (Field field : row) {
+                array.append("(");
+                //array.append(field.getState());
+                //array.append(" , ");
+                array.append(field.getUserNumber()+1);
+                array.append(")  ");
+            }
+            array.append("]\n");
+        }
+        return array.toString();
     }
 }

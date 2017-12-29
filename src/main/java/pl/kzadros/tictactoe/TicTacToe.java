@@ -1,5 +1,7 @@
 package pl.kzadros.tictactoe;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pl.kzadros.tictactoe.controller.GameController;
@@ -23,6 +25,15 @@ public class TicTacToe {
         UserRepository userRepo = new UserRepository();
         userRepo.save(mistrz);
         userRepo.save(malgorzata);
+        
+        GameBoard game = GameBoardFactory.createTicTacToe();
+        List<User> players = new ArrayList<>();
+        players.add(mistrz);
+        players.add(malgorzata);
+        game.setPlayers(players);
+        
+        GameBoardRepository gameRepo = new GameBoardRepository();
+        gameRepo.save(game);
     }
     
     public static void main(String[] args) {
@@ -32,7 +43,9 @@ public class TicTacToe {
             Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
         }
         GameController controller = new GameController();
-        try {
+        
+        
+        /*try {
             //GameBoard game = GameBoardFactory.create(3);
             String gameId = controller.initGame("1", "2");
             MoveDto move = new MoveDto();
@@ -45,6 +58,10 @@ public class TicTacToe {
             //Logger.getLogger(TicTacToe.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
         }
+        */
+        
+        controller.checkMovesSeries();
+
         System.out.println("Koniec.");
     }
 }

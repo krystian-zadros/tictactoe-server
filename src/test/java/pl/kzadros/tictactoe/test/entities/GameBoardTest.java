@@ -7,7 +7,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import pl.kzadros.tictactoe.entities.GameBoard;
 import pl.kzadros.tictactoe.entities.factory.GameBoardFactory;
+import pl.kzadros.tictactoe.entities.figures.Field;
 import pl.kzadros.tictactoe.states.FieldStates;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  *
@@ -15,27 +25,27 @@ import pl.kzadros.tictactoe.states.FieldStates;
  */
 public class GameBoardTest {
     
-    int colsNumberExpected; // = 3;
-    int rowsNumberExpected; // = 3;
-    int fieldEmptyExpected; // = FieldStates.EMPTY.ordinal();
+    int colsNumberExpectedForTicTacToe; // = 3;
+    int rowsNumberExpectedForTicTacToe; // = 3;
+    FieldStates fieldEmptyExpected; // = FieldStates.EMPTY.ordinal();
     
     @Before
     public void init() {
-        colsNumberExpected = 3;
-        rowsNumberExpected = 3;
-        fieldEmptyExpected = FieldStates.EMPTY.ordinal();
+        colsNumberExpectedForTicTacToe = 3;
+        rowsNumberExpectedForTicTacToe = 3;
+        fieldEmptyExpected = FieldStates.EMPTY;
     }
     
     @Test
     public void checkInitializedBoardSizes() {
         // Given
-        GameBoard board = GameBoardFactory.create(colsNumberExpected);
+        GameBoard board = GameBoardFactory.createTicTacToe();
         // Do
         int colNumbers = board.getBoard().length;
         int rowNumbers = board.getBoard()[0].length;
         // Then
-        assertEquals(colNumbers, colsNumberExpected);
-        assertEquals(rowNumbers, rowsNumberExpected);
+        assertEquals(colNumbers, colsNumberExpectedForTicTacToe);
+        assertEquals(rowNumbers, rowsNumberExpectedForTicTacToe);
     }
     
     /**
@@ -44,12 +54,12 @@ public class GameBoardTest {
     @Test
     public void boardElementsInitializedProperly() {
         // Given
-        GameBoard board = GameBoardFactory.create(colsNumberExpected);
+        GameBoard board = GameBoardFactory.createTicTacToe();
         
         // Do and Then
-        for (Integer[] row : board.getBoard()) {
-            for (int actualField : row) {
-                assertEquals(actualField, fieldEmptyExpected);
+        for (Field[] row : board.getBoard()) {
+            for (Field currentField : row) {
+                assertEquals(currentField.getState(), fieldEmptyExpected);
             }
         }
     }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import pl.kzadros.tictactoe.controller.GameController;
 import pl.kzadros.tictactoe.dto.MoveDto;
 import pl.kzadros.tictactoe.entities.GameBoard;
@@ -14,6 +16,7 @@ import pl.kzadros.tictactoe.entities.factory.UserFactory;
 import pl.kzadros.tictactoe.repository.GameBoardRepository;
 import pl.kzadros.tictactoe.repository.UserRepository;
 
+@SpringBootApplication
 public class TicTacToe {
     public static void initDatabase() throws Exception {
         User mistrz = UserFactory.create("Mistrz");
@@ -62,6 +65,8 @@ public class TicTacToe {
         
         controller.checkMovesSeries();
 
+        SpringApplication.run(TicTacToe.class, args);
+        
         System.out.println("Koniec.");
     }
 }
